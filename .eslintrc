@@ -1,4 +1,8 @@
 {
-  "extends": "airbnb",
-  "parser": "babel-eslint"
+  "extends": ["4catalyzer-react", "prettier"],
+  "plugins": ["prettier"],
+  "parser": "babel-eslint",
+  "rules": {
+    "prettier/prettier": "error"
+  }
 }

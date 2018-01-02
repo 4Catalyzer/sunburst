@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { spring, TransitionMotion } from 'react-motion';
 
 import Sunburst from './Sunburst';
@@ -7,17 +8,17 @@ const PLOT_KEY = '@@plot';
 
 export default class SunburstContainer extends React.Component {
   static propTypes = {
-    data: React.PropTypes.shape({
-      children: React.PropTypes.array.isRequired,
-      data: React.PropTypes.object.isRequired,
-      id: React.PropTypes.any.isRewquired,
+    data: PropTypes.shape({
+      children: PropTypes.array.isRequired,
+      data: PropTypes.object.isRequired,
+      id: PropTypes.any.isRewquired,
     }).isRequired,
-    highlightedKey: React.PropTypes.any,
-    rootNode: React.PropTypes.any,
-    depthLevel: React.PropTypes.number.isRequired,
-    jagged: React.PropTypes.bool.isRequired,
-    onSliceOver: React.PropTypes.func,
-    onSliceClick: React.PropTypes.func,
+    highlightedKey: PropTypes.any,
+    rootNode: PropTypes.any,
+    depthLevel: PropTypes.number.isRequired,
+    jagged: PropTypes.bool.isRequired,
+    onSliceOver: PropTypes.func,
+    onSliceClick: PropTypes.func,
   };
 
   static defaultProps = {
@@ -50,7 +51,8 @@ export default class SunburstContainer extends React.Component {
       });
     }
 
-    const nodes = root.descendants()
+    const nodes = root
+      .descendants()
       .map(({ id, data, parent, value, fade }) => ({
         id,
         parentId: parent && parent.id,
@@ -107,7 +109,7 @@ export default class SunburstContainer extends React.Component {
     return styles;
   };
 
-  renderStyles = (styles) => {
+  renderStyles = styles => {
     const plotStyle = styles.pop().style;
     const { onSliceClick, onSliceOver } = this.props;
 

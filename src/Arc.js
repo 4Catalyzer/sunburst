@@ -1,4 +1,5 @@
 import { arc } from 'd3-shape';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import TextPath from './TextPath';
@@ -11,12 +12,12 @@ const QUADRANT_2 = Math.PI * 0.5;
 const QUADRANT_4 = Math.PI * 1.5;
 
 const propTypes = {
-  children: React.PropTypes.node,
-  innerRadius: React.PropTypes.number.isRequired,
-  outerRadius: React.PropTypes.number.isRequired,
-  startAngle: React.PropTypes.number.isRequired,
-  endAngle: React.PropTypes.number.isRequired,
-  label: React.PropTypes.string,
+  children: PropTypes.node,
+  innerRadius: PropTypes.number.isRequired,
+  outerRadius: PropTypes.number.isRequired,
+  startAngle: PropTypes.number.isRequired,
+  endAngle: PropTypes.number.isRequired,
+  label: PropTypes.string,
 };
 
 function trimString(text, length) {
@@ -26,11 +27,17 @@ function trimString(text, length) {
 }
 
 function generateLabel(
-  arcFunc, innerRadius, outerRadius, endAngle, startAngle, label
+  arcFunc,
+  innerRadius,
+  outerRadius,
+  endAngle,
+  startAngle,
+  label,
 ) {
-  if (!label
-      || endAngle - startAngle <= 0.05
-      || outerRadius - innerRadius <= 0.05
+  if (
+    !label ||
+    endAngle - startAngle <= 0.05 ||
+    outerRadius - innerRadius <= 0.05
   ) {
     return null;
   }
@@ -62,9 +69,14 @@ function generateLabel(
   );
 }
 
-function Arc(
-  { innerRadius, outerRadius, startAngle, endAngle, label, ...props }
-) {
+function Arc({
+  innerRadius,
+  outerRadius,
+  startAngle,
+  endAngle,
+  label,
+  ...props
+}) {
   const arcFunc = arc()
     .innerRadius(innerRadius)
     .outerRadius(outerRadius)
@@ -72,7 +84,12 @@ function Arc(
     .endAngle(endAngle);
   const path = arcFunc();
   const generatedLabel = generateLabel(
-    arcFunc, innerRadius, outerRadius, endAngle, startAngle, label
+    arcFunc,
+    innerRadius,
+    outerRadius,
+    endAngle,
+    startAngle,
+    label,
   );
   return (
     <g {...props}>

@@ -1,17 +1,18 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import Arc from './Arc';
 
 export default class SunburstSlice extends React.Component {
   static propTypes = {
-    angleScale: React.PropTypes.func.isRequired,
-    fillScale: React.PropTypes.func.isRequired,
-    jagged: React.PropTypes.number.isRequired,
-    maxDepth: React.PropTypes.number.isRequired,
-    node: React.PropTypes.object.isRequired,
-    onSliceClick: React.PropTypes.func,
-    onSliceOver: React.PropTypes.func,
-    radiusScale: React.PropTypes.func.isRequired,
+    angleScale: PropTypes.func.isRequired,
+    fillScale: PropTypes.func.isRequired,
+    jagged: PropTypes.number.isRequired,
+    maxDepth: PropTypes.number.isRequired,
+    node: PropTypes.object.isRequired,
+    onSliceClick: PropTypes.func,
+    onSliceOver: PropTypes.func,
+    radiusScale: PropTypes.func.isRequired,
   };
 
   onMouseEnter = () => {
@@ -29,10 +30,14 @@ export default class SunburstSlice extends React.Component {
     if (onSliceClick) onSliceClick(node);
   };
 
-
   render() {
     const {
-      angleScale, fillScale, jagged, maxDepth, node, radiusScale,
+      angleScale,
+      fillScale,
+      jagged,
+      maxDepth,
+      node,
+      radiusScale,
     } = this.props;
     const { x0, x1, depth, data, children } = node;
     const { key, fade } = data;
@@ -73,11 +78,10 @@ export default class SunburstSlice extends React.Component {
       />
     );
 
-
     if (
       !children ||
       node.depth >= maxDepth ||
-      innerRadius > 5 && innerRadius * (endAngle - startAngle) <= 1
+      (innerRadius > 5 && innerRadius * (endAngle - startAngle) <= 1)
     ) {
       return arc;
     }
@@ -87,11 +91,7 @@ export default class SunburstSlice extends React.Component {
         {arc}
 
         {children.map(child => (
-          <SunburstSlice
-            {...this.props}
-            key={child.data.key}
-            node={child}
-          />
+          <SunburstSlice {...this.props} key={child.data.key} node={child} />
         ))}
       </g>
     );

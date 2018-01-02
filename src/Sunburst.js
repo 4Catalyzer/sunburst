@@ -1,6 +1,11 @@
 import { partition, stratify } from 'd3-hierarchy';
-import { scaleLinear, scaleOrdinal, scaleSqrt, schemeCategory20b }
-  from 'd3-scale';
+import {
+  scaleLinear,
+  scaleOrdinal,
+  scaleSqrt,
+  schemeCategory20b,
+} from 'd3-scale';
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import SunburstSlice from './SunburstSlice';
@@ -10,23 +15,23 @@ const partitioner = partition();
 
 export default class Sunburst extends React.Component {
   static propTypes = {
-    nodes: React.PropTypes.array.isRequired,
-    minX: React.PropTypes.number.isRequired,
-    maxX: React.PropTypes.number.isRequired,
-    minDepth: React.PropTypes.number.isRequired,
-    maxDepth: React.PropTypes.number.isRequired,
-    jagged: React.PropTypes.number.isRequired,
-    height: React.PropTypes.number.isRequired,
-    width: React.PropTypes.number.isRequired,
-    onSliceOver: React.PropTypes.func,
-    onSliceClick: React.PropTypes.func,
+    // eslint-disable-next-line
+    nodes: PropTypes.array.isRequired,
+    minX: PropTypes.number.isRequired,
+    maxX: PropTypes.number.isRequired,
+    minDepth: PropTypes.number.isRequired,
+    maxDepth: PropTypes.number.isRequired,
+    jagged: PropTypes.number.isRequired,
+    height: PropTypes.number.isRequired,
+    width: PropTypes.number.isRequired,
+    onSliceOver: PropTypes.func,
+    onSliceClick: PropTypes.func,
   };
 
   constructor(props, context) {
     super(props, context);
 
-    this.radiusScale = scaleSqrt()
-      .clamp(true);
+    this.radiusScale = scaleSqrt().clamp(true);
     this.angleScale = scaleLinear()
       .range([0, 2 * Math.PI])
       .clamp(true);
@@ -45,18 +50,23 @@ export default class Sunburst extends React.Component {
 
   render() {
     const {
-      nodes, minX, maxX, minDepth, maxDepth, jagged, height, width,
-      onSliceClick, onSliceOver,
+      nodes,
+      minX,
+      maxX,
+      minDepth,
+      maxDepth,
+      jagged,
+      height,
+      width,
+      onSliceClick,
+      onSliceOver,
     } = this.props;
 
     const radius = Math.min(width, height) / 2;
     const { radiusScale, angleScale, fillScale } = this;
 
-    radiusScale
-      .domain([minDepth, maxDepth + 1])
-      .range([0, radius]);
-    angleScale
-      .domain([minX, maxX]);
+    radiusScale.domain([minDepth, maxDepth + 1]).range([0, radius]);
+    angleScale.domain([minX, maxX]);
 
     const root = this.getRoot(nodes);
     root.each(({ id }) => {
