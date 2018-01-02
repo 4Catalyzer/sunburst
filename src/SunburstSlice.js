@@ -30,10 +30,14 @@ export default class SunburstSlice extends React.Component {
     if (onSliceClick) onSliceClick(node);
   };
 
-
   render() {
     const {
-      angleScale, fillScale, jagged, maxDepth, node, radiusScale,
+      angleScale,
+      fillScale,
+      jagged,
+      maxDepth,
+      node,
+      radiusScale,
     } = this.props;
     const { x0, x1, depth, data, children } = node;
     const { key, fade } = data;
@@ -74,11 +78,10 @@ export default class SunburstSlice extends React.Component {
       />
     );
 
-
     if (
       !children ||
       node.depth >= maxDepth ||
-      innerRadius > 5 && innerRadius * (endAngle - startAngle) <= 1
+      (innerRadius > 5 && innerRadius * (endAngle - startAngle) <= 1)
     ) {
       return arc;
     }
@@ -88,11 +91,7 @@ export default class SunburstSlice extends React.Component {
         {arc}
 
         {children.map(child => (
-          <SunburstSlice
-            {...this.props}
-            key={child.data.key}
-            node={child}
-          />
+          <SunburstSlice {...this.props} key={child.data.key} node={child} />
         ))}
       </g>
     );

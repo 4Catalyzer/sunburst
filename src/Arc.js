@@ -27,11 +27,17 @@ function trimString(text, length) {
 }
 
 function generateLabel(
-  arcFunc, innerRadius, outerRadius, endAngle, startAngle, label
+  arcFunc,
+  innerRadius,
+  outerRadius,
+  endAngle,
+  startAngle,
+  label,
 ) {
-  if (!label
-      || endAngle - startAngle <= 0.05
-      || outerRadius - innerRadius <= 0.05
+  if (
+    !label ||
+    endAngle - startAngle <= 0.05 ||
+    outerRadius - innerRadius <= 0.05
   ) {
     return null;
   }
@@ -63,9 +69,14 @@ function generateLabel(
   );
 }
 
-function Arc(
-  { innerRadius, outerRadius, startAngle, endAngle, label, ...props }
-) {
+function Arc({
+  innerRadius,
+  outerRadius,
+  startAngle,
+  endAngle,
+  label,
+  ...props
+}) {
   const arcFunc = arc()
     .innerRadius(innerRadius)
     .outerRadius(outerRadius)
@@ -73,7 +84,12 @@ function Arc(
     .endAngle(endAngle);
   const path = arcFunc();
   const generatedLabel = generateLabel(
-    arcFunc, innerRadius, outerRadius, endAngle, startAngle, label
+    arcFunc,
+    innerRadius,
+    outerRadius,
+    endAngle,
+    startAngle,
+    label,
   );
   return (
     <g {...props}>

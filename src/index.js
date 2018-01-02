@@ -51,7 +51,8 @@ export default class SunburstContainer extends React.Component {
       });
     }
 
-    const nodes = root.descendants()
+    const nodes = root
+      .descendants()
       .map(({ id, data, parent, value, fade }) => ({
         id,
         parentId: parent && parent.id,
@@ -108,7 +109,7 @@ export default class SunburstContainer extends React.Component {
     return styles;
   };
 
-  renderStyles = (styles) => {
+  renderStyles = styles => {
     const plotStyle = styles.pop().style;
     const { onSliceClick, onSliceOver } = this.props;
 

@@ -1,6 +1,10 @@
 import { partition, stratify } from 'd3-hierarchy';
-import { scaleLinear, scaleOrdinal, scaleSqrt, schemeCategory20b }
-  from 'd3-scale';
+import {
+  scaleLinear,
+  scaleOrdinal,
+  scaleSqrt,
+  schemeCategory20b,
+} from 'd3-scale';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -27,8 +31,7 @@ export default class Sunburst extends React.Component {
   constructor(props, context) {
     super(props, context);
 
-    this.radiusScale = scaleSqrt()
-      .clamp(true);
+    this.radiusScale = scaleSqrt().clamp(true);
     this.angleScale = scaleLinear()
       .range([0, 2 * Math.PI])
       .clamp(true);
@@ -47,18 +50,23 @@ export default class Sunburst extends React.Component {
 
   render() {
     const {
-      nodes, minX, maxX, minDepth, maxDepth, jagged, height, width,
-      onSliceClick, onSliceOver,
+      nodes,
+      minX,
+      maxX,
+      minDepth,
+      maxDepth,
+      jagged,
+      height,
+      width,
+      onSliceClick,
+      onSliceOver,
     } = this.props;
 
     const radius = Math.min(width, height) / 2;
     const { radiusScale, angleScale, fillScale } = this;
 
-    radiusScale
-      .domain([minDepth, maxDepth + 1])
-      .range([0, radius]);
-    angleScale
-      .domain([minX, maxX]);
+    radiusScale.domain([minDepth, maxDepth + 1]).range([0, radius]);
+    angleScale.domain([minX, maxX]);
 
     const root = this.getRoot(nodes);
     root.each(({ id }) => {

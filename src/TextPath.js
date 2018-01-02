@@ -13,11 +13,7 @@ const propTypes = {
 export default function TextPath({ path, children, startOffset, ...props }) {
   const id = `__TextPath__${++gid}`;
   return (
-    <text
-      textAnchor="middle"
-      dominantBaseline="middle"
-      {...props}
-    >
+    <text textAnchor="middle" dominantBaseline="middle" {...props}>
       <defs>
         <path id={id} d={path} />
       </defs>
