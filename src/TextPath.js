@@ -1,12 +1,13 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 // path definition has to have a unique global id
 let gid = 0;
 
 const propTypes = {
-  children: React.PropTypes.node,
-  path: React.PropTypes.string.isRequired,
-  startOffset: React.PropTypes.string,
+  children: PropTypes.node,
+  path: PropTypes.string.isRequired,
+  startOffset: PropTypes.string,
 };
 
 export default function TextPath({ path, children, startOffset, ...props }) {

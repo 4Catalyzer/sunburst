@@ -1,17 +1,18 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 
 import Arc from './Arc';
 
 export default class SunburstSlice extends React.Component {
   static propTypes = {
-    angleScale: React.PropTypes.func.isRequired,
-    fillScale: React.PropTypes.func.isRequired,
-    jagged: React.PropTypes.number.isRequired,
-    maxDepth: React.PropTypes.number.isRequired,
-    node: React.PropTypes.object.isRequired,
-    onSliceClick: React.PropTypes.func,
-    onSliceOver: React.PropTypes.func,
-    radiusScale: React.PropTypes.func.isRequired,
+    angleScale: PropTypes.func.isRequired,
+    fillScale: PropTypes.func.isRequired,
+    jagged: PropTypes.number.isRequired,
+    maxDepth: PropTypes.number.isRequired,
+    node: PropTypes.object.isRequired,
+    onSliceClick: PropTypes.func,
+    onSliceOver: PropTypes.func,
+    radiusScale: PropTypes.func.isRequired,
   };
 
   onMouseEnter = () => {
